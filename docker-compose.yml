@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+
+networks:
+  chamadaWEB_net:
+    driver: bridge
