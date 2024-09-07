@@ -23,6 +23,7 @@ class Discipline extends Model
         'capacity',
         'teacherId',
         'studentRegistrations',
+        'isOpne',
     ];
 
     /**
@@ -32,6 +33,7 @@ class Discipline extends Model
      */
     protected $casts = [
         'studentRegistrations' => 'array', // Converte o campo studentRegistrations para um array
+        'isOpen' => 'boolean',
     ];
 
     /**
