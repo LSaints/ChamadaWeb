@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Student extends AbstractUser
+class Student extends User
 {
     /**
      * Matrícula do aluno.

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends AbstractUser
+class Teacher extends User
 {
     /**
      * Disciplina do professor.
@@ -34,7 +34,7 @@ class Teacher extends AbstractUser
      */
     public function getDisciplinaIdAttribute(): string
     {
-        return $this->attributes['disciplinaId'];
+        return $this->attributes['disciplinaId']->name();
     }
 
     /**
