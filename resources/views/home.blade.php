@@ -14,8 +14,8 @@
 
 <div class="container">
     <div class="text-center mb-4">
-        <h2 id="welcome-message">Olá, [Nome]</h2>
-        <p id="role-info" class="lead">Você é um [Cargo]</p>
+        <h2 id="welcome-message">Olá, {{ $name }}</h2>
+        <p id="role-info" class="lead">Você é um {{ $cargo }}</p>
     </div>
 
     <!-- Disciplinas e informações específicas -->
