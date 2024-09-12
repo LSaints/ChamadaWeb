@@ -6,7 +6,8 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title text-center">Registro</h2>
-            <form action="/register" method="post">
+            <form action="{{ route('user.create') }}" method="post">
+                @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -24,11 +25,11 @@
                     <input type="text" class="form-control" id="cpf" name="cpf" required>
                 </div>
                 <div class="mb-3">
-                    <label for="job" class="form-label">Cargo</label>
-                        <select id="job" name="job" class="form-select" required>
+                    <label for="role" class="form-label">Cargo</label>
+                        <select id="role" name="role" class="form-select" required>
                             <option value="" disabled selected>Selecione um cargo</option>
-                            <option value="professor">Professor</option>
-                            <option value="aluno">Aluno</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Aluno">Aluno</option>
                         </select>
                     </div>
                 <button type="submit" class="btn btn-primary w-100">Registrar</button>

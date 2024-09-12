@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return view('login');
-});
+// Auth Routes
+Route::get('/', [AuthController::class, 'index'])->name('auth.index');
 
 Route::prefix('auth')->group(function () {
     Route::get('/login', function() {
@@ -15,13 +16,10 @@ Route::prefix('auth')->group(function () {
 
 Route::redirect('/', '/auth/login');
 
-Route::get('register', function () {
-    return View('register');
-});
+// Home Routes
+Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::get('profile', function () {
-    return View('profile');
-});
-
+// User Routes
+Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
+Route::get('register', [UserController::class, 'register'])->name('user.register');
+Route::post('user', [UserController::class, 'store'])->name('user.create');

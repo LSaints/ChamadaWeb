@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('cpf');
-            $table->integer('role');
+            $table->string('role');
             $table->string('registration')->nullable(); // Adiciona a coluna registration para Student
             $table->text('disciplineId')->nullable(); // Adiciona a coluna disciplineId para Student
             $table->timestamps();
