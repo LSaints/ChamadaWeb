@@ -15,6 +15,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::redirect('/', '/auth/login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::redirect('/logout', '/auth/login');
 
 // Home Routes
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');

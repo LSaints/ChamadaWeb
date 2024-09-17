@@ -2,20 +2,11 @@
 
 @section('content')
 
-<header class="header mb-4">
-    <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="h4 mb-0">Sistema de Gestão</h1>
-        <nav>
-            <a href="/profile" class="me-3">Perfil</a>
-            <a href="/">Sair</a>
-        </nav>
-    </div>
-</header>
 
 <div class="container">
     <div class="text-center mb-4">
-        <h2 id="welcome-message">Olá, {{ $name }}</h2>
-        <p id="role-info" class="lead">Você é um {{ $cargo }}</p>
+        <h2 id="welcome-message">Olá, {{ $user->name }}</h2>
+        <p id="role-info" class="lead">Você é um {{ $user->role }}</p>
     </div>
 
     <!-- Disciplinas e informações específicas -->
