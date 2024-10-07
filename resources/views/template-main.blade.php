@@ -32,7 +32,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('profile') ? 'active' : '' }}" href="/profile">Perfil</a>
                         </li>
-                        <!-- Adicione mais itens de menu conforme necessário -->
+
                     </ul>
                 </div>
             </nav>

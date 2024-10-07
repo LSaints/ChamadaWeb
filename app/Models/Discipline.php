@@ -22,7 +22,6 @@ class Discipline extends Model
         'name',
         'capacity',
         'teacherId',
-        'studentRegistrations',
         'isOpne',
     ];
 
@@ -32,7 +31,6 @@ class Discipline extends Model
      * @var array
      */
     protected $casts = [
-        'studentRegistrations' => 'array', // Converte o campo studentRegistrations para um array
         'isOpen' => 'boolean',
     ];
 
@@ -54,25 +52,5 @@ class Discipline extends Model
     public function setTeacherIdAttribute(int $value): void
     {
         $this->attributes['teacherId'] = $value;
-    }
-
-    /**
-     * Obter a lista de matrículas dos alunos cadastrados na disciplina.
-     *
-     * @return array
-     */
-    public function getStudentRegistrationsAttribute(): array
-    {
-        return $this->attributes['studentRegistrations'] ? json_decode($this->attributes['studentRegistrations'], true) : [];
-    }
-
-    /**
-     * Definir a lista de matrículas dos alunos cadastrados na disciplina.
-     *
-     * @param array $value
-     */
-    public function setStudentRegistrationsAttribute(array $value): void
-    {
-        $this->attributes['studentRegistrations'] = json_encode($value);
     }
 }

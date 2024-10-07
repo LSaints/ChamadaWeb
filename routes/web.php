@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DisciplineController;
 
 // Auth Routes
 Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -26,3 +27,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
 Route::get('register', [UserController::class, 'register'])->name('user.register');
 Route::post('user', [UserController::class, 'store'])->name('user.create');
+
+
+// Discipline Routes
+Route::post('/discipline', [DisciplineController::class, 'create'])->name('discipline.create');
+Route::get('disciplines/teacher', [DisciplineController::class, 'getDisciplineByTeacherId'])->name('disciplines.byTeacher');
+

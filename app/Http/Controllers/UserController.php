@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Discipline;
 use App\Enums\Role;
 use Illuminate\Support\Facades\Session;
 
@@ -12,7 +13,14 @@ class UserController extends Controller
     public function profile()
     {
         $user = Session::get('user');
-        return View('profile', compact('user'));
+
+        if (!$user || !isset($user->id)) {
+            return redirect()->route('login');
+        }
+
+        $disciplines = Discipline::where('teacherId', $user->id)->get();
+
+        return view('profile', compact('user', 'disciplines'));
     }
 
     public function register()

@@ -9,7 +9,6 @@
             <p id="user-role">Cargo: {{ $user->role }}</p>
         </div>
 
-        <!-- Informações do Perfil -->
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
@@ -30,10 +29,42 @@
                         @if ($user->role === 'Aluno')
                             <p><strong>Matricula:</strong> {{ $user->registration }}</p>
                         @endif
-                        <!-- Adicione mais informações de conta, se necessário -->
+
                     </div>
                 </div>
             </div>
+            @if ($user->role === 'Professor')
+            <div class="col-md-6">
+                <h5>Adicionar Disciplina</h5>
+                <form action="{{ route('discipline.create') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome da Disciplina</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="capacity" class="form-label">Capacidade</label>
+                        <input type="number" class="form-control" id="capacity" name="capacity" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar Disciplina</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h5>Minhas Disciplinas</h5>
+                    @if($disciplines->isEmpty())
+                        <p>Você ainda não possui disciplinas cadastradas.</p>
+                    @else
+                    <ul class="list-group">
+                        @foreach($disciplines as $discipline)
+                            <li class="list-group-item">
+                                <strong>{{ $discipline->name }}</strong> - Capacidade: {{ $discipline->capacity }} - Aberta: {{ $discipline->isOpen ? 'Sim' : 'Não' }}
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+             </div>
+            @endif
         </div>
     </div>
 </body>

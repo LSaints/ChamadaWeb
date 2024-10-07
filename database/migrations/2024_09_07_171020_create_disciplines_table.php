@@ -13,7 +13,6 @@ class CreateDisciplinesTable extends Migration
             $table->string('name');
             $table->integer('capacity');
             $table->unsignedBigInteger('teacherId');
-            $table->json('studentRegistrations')->nullable(); // Lista de matrículas dos alunos
             $table->timestamps();
 
             // Adiciona chave estrangeira para a tabela users
