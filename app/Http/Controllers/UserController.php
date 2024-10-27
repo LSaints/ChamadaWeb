@@ -26,6 +26,11 @@ class UserController extends Controller
         return view('profile', compact('user', 'disciplines', 'allDisciplines', 'student_disciplines'));
     }
 
+    public function register()
+    {
+        return view('register');
+    }
+
     public function store()
     {
         try {
