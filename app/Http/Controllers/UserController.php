@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\StudentDiscipline;
 use App\Models\Discipline;
 use App\Enums\Role;
 use Illuminate\Support\Facades\Session;
@@ -20,14 +21,9 @@ class UserController extends Controller
 
         $disciplines = Discipline::where('teacherId', $user->id)->get();
         $allDisciplines = Discipline::get();
+        $student_disciplines = StudentDiscipline::where('registration', $user->registration)->pluck('discipline_id')->toArray(); // Converte para um array
 
-
-        return view('profile', compact('user', 'disciplines', 'allDisciplines'));
-    }
-
-    public function register()
-    {
-        return view('register');
+        return view('profile', compact('user', 'disciplines', 'allDisciplines', 'student_disciplines'));
     }
 
     public function store()

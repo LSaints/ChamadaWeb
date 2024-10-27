@@ -32,15 +32,22 @@
                         @else
                             <ul class="list-group">
                                 @foreach($allDisciplines as $discipline)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <strong>{{ $discipline->name }}</strong>
-                                    <span>Capacidade: {{ $discipline->capacity }} - Aberta: {{ $discipline->isOpen ? 'Sim' : 'Não' }}</span>
-                                    <form action="{{ route('discipline.AddDisciplineToStudent', ['disciplineId' => $discipline->id]) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-primary btn-sm">Adicionar</button>
-                                    </form>
-                                </li>
-                            @endforeach
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <strong>{{ $discipline->name }}</strong>
+                                        <span>Capacidade: {{ $discipline->capacity }} - Aberta: {{ $discipline->isOpen ? 'Sim' : 'Não' }}</span>
+                                        <form action="{{ route('discipline.AddDisciplineToStudent', ['disciplineId' => $discipline->id]) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-primary btn-sm" @if(in_array($discipline->id, $student_disciplines)) disabled @endif>
+                                                @if(in_array($discipline->id, $student_disciplines))
+                                                    Já foi adicionada
+                                                @else
+                                                    Adicionar
+                                                @endif
+                                            </button>
+
+                                        </form>
+                                    </li>
+                                @endforeach
                             </ul>
                         @endif
                     @endif
@@ -95,10 +102,11 @@
 </div>
 
 <script>
-   function addDisciplineToStudent(discipline) {
-    axios.post(`/disciplines/${discipline.id}/add`)
+    function addDisciplineToStudent(discipline) {
+        axios.post(`/disciplines/${discipline.id}/add`)
             .then(response => {
-                alert(response);
+                alert('Disciplina adicionada com sucesso!');
+                location.reload();
             })
             .catch(error => {
                 if (error.response) {
@@ -107,6 +115,6 @@
                     alert('Ocorreu um erro ao adicionar a disciplina. Tente novamente.');
                 }
             });
-}
+    }
 </script>
 @endsection
