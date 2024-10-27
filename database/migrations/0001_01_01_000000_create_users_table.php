@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('password');
             $table->string('cpf');
             $table->string('role');
-            $table->string('registration')->nullable(); // Adiciona a coluna registration para Student
-            $table->text('disciplineId')->nullable(); // Adiciona a coluna disciplineId para Student
+            $table->string('registration')->nullable()->unique(); // Adiciona a restrição de unicidade
+            $table->text('disciplineId')->nullable();
             $table->timestamps();
         });
+
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();

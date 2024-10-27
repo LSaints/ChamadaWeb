@@ -13,9 +13,15 @@ class User extends Model
         'password',
         'cpf',
         'role',
+        'registration'
     ];
 
     protected $hidden = [
       'password',
     ];
+
+    public function disciplines()
+    {
+        return $this->hasMany(StudentDiscipline::class, 'registration', 'id');
+    }
 }

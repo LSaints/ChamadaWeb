@@ -19,8 +19,10 @@ class UserController extends Controller
         }
 
         $disciplines = Discipline::where('teacherId', $user->id)->get();
+        $allDisciplines = Discipline::get();
 
-        return view('profile', compact('user', 'disciplines'));
+
+        return view('profile', compact('user', 'disciplines', 'allDisciplines'));
     }
 
     public function register()

@@ -53,4 +53,9 @@ class Discipline extends Model
     {
         $this->attributes['teacherId'] = $value;
     }
+
+    public function students()
+    {
+        return $this->hasMany(StudentDiscipline::class, 'discipline_id');
+    }
 }

@@ -32,4 +32,4 @@ Route::post('user', [UserController::class, 'store'])->name('user.create');
 // Discipline Routes
 Route::post('/discipline', [DisciplineController::class, 'create'])->name('discipline.create');
 Route::get('disciplines/teacher', [DisciplineController::class, 'getDisciplineByTeacherId'])->name('disciplines.byTeacher');
-
+Route::post('/disciplines/{disciplineId}/add', [DisciplineController::class, 'AddDisciplineToStudent'])->name('discipline.AddDisciplineToStudent');
