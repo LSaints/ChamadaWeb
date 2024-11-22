@@ -8,57 +8,46 @@
         <h2 id="welcome-message">Olá, {{ $user->name }}</h2>
         <p id="role-info" class="lead">Você é um {{ $user->role }}</p>
     </div>
+    @if ($user->role !== 'Aluno')
+        <h3 class="mb-4">Área do Professor</h3>
+        <p>Bem-vindo à sua área de gestão de disciplinas e acompanhamento de alunos.</p>
 
-    <!-- Disciplinas e informações específicas -->
-    <div id="professor-content" class="role-specific-content">
-        <h3 class="mb-4">Suas Disciplinas</h3>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-book"></i> Matemática</h5>
-                        <p>Gerencie planos de aula e acompanhe o progresso dos alunos.</p>
+                        <h5 class="card-title"><i class="bi bi-book"></i> Gerenciar Disciplinas</h5>
+                        <p class="card-text">Visualize e edite as disciplinas que você ensina.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-book"></i> Física</h5>
-                        <p>Crie e revise materiais didáticos e avaliações.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Adicione mais disciplinas conforme necessário -->
-        </div>
-        <h3 class="mt-4">Outras Informações</h3>
-        <p>Você pode gerenciar suas disciplinas, consultar planos de aula e acompanhar o progresso dos alunos.</p>
-    </div>
 
-    <div id="student-content" class="role-specific-content">
-        <h3 class="mb-4">Suas Disciplinas</h3>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-book"></i> Matemática</h5>
-                        <p>Consulte notas e verifique atividades pendentes.</p>
+                        <h5 class="card-title"><i class="bi bi-calendar-check"></i> Planos de Aula</h5>
+                        <p class="card-text">Crie e gerencie seus planos de aula para cada disciplina.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-book"></i> História</h5>
-                        <p>Acompanhe o progresso e revise o material estudado.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Adicione mais disciplinas conforme necessário -->
         </div>
-        <h3 class="mt-4">Outras Informações</h3>
-        <p>Você pode consultar suas notas, verificar atividades e acompanhar o progresso das disciplinas.</p>
-    </div>
+    @else
+        <div id="professor-content" class="role-specific-content">
+            <h3 class="mb-4">Suas Disciplinas</h3>
+            <div class="row">
+                @foreach($disciplines as $discipline)
+                    <div class="col-md-6">
+                        <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-book"></i> {{ $discipline->name }}</h5>
+                                    <p>Gerencie planos de aula e acompanhe o progresso dos alunos.</p>
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 </div>
 
 

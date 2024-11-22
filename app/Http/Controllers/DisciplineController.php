@@ -44,22 +44,18 @@ class DisciplineController extends Controller
             return response()->json(['error' => 'Usuário não autenticado'], 401);
         }
 
-        // Obtém a matrícula do estudante
         $registration = $student->registration;
 
-        // Verifica se a matrícula existe na tabela users
         $userExists = DB::table('users')->where('registration', $registration)->exists();
         if (!$userExists) {
             return response()->json(['error' => 'Matrícula não encontrada na tabela de usuários'], 404);
         }
 
-        // Verifica se a disciplina existe
         $discipline = Discipline::find($disciplineId);
         if (!$discipline) {
             return response()->json(['error' => 'Disciplina não encontrada'], 404);
         }
 
-        // Tenta inserir o registro na tabela student_disciplines
         try {
             DB::table('student_disciplines')->insert([
                 'registration' => $registration,
@@ -89,4 +85,36 @@ class DisciplineController extends Controller
         return response()->json($disciplines);
     }
 
+    public function getDisciplineByStudendtRegistration()
+    {
+        $user = Session::get('user');
+        if (!$user || !isset($user->registration)) {
+            return response()->json(['error' => 'Usuário não autenticado'], 401);
+        }
+
+        $disciplines = Discipline::where('registration', $user->registration)->get();
+        return response()->json($disciplines);
+    }
+
+    public function getDisciplineView(string $disciplineId)
+    {
+        try {
+            $discipline = Discipline::findOrFail($disciplineId);
+
+            $studentDisciplines = StudentDiscipline::where('discipline_id', $discipline->id)->get();
+
+            if ($studentDisciplines->isEmpty()) {
+                return redirect()->route('home')->with('error', 'Não há alunos matriculados nesta disciplina.');
+            }
+
+            $registrationNumbers = $studentDisciplines->pluck('registration');
+
+            $students = User::whereIn('registration', $registrationNumbers)->get();
+
+            return view('discipline', compact('discipline', 'students'));
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('home')->with('error', 'Disciplina não encontrada.');
+        }
+    }
 }

@@ -90,6 +90,9 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <strong>{{ $discipline->name }}</strong>
                                         <span>Capacidade: {{ $discipline->capacity }} - Aberta: {{ $discipline->isOpen ? 'Sim' : 'Não' }}</span>
+                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="window.location.href='{{ route('disciplines.getDisciplineView', $discipline->id) }}'">
+                                            Visualizar
+                                        </button>
                                     </li>
                                 @endforeach
                             </ul>
@@ -114,7 +117,12 @@
                 } else {
                     alert('Ocorreu um erro ao adicionar a disciplina. Tente novamente.');
                 }
-            });
+            }
+        );
+    }
+
+    function pushToDisciplineView(disciplineId) {
+        location.push('/home')
     }
 </script>
 @endsection
